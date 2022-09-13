@@ -1,4 +1,5 @@
 from rest_framework import generics, status, permissions, mixins, viewsets
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -14,7 +15,7 @@ class LoginView(TokenObtainPairView):
     authentication_classes = ()
 
 
-class LogoutView(generics.GenericAPIView):
+class LogoutView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = [JWTAuthentication]
 
