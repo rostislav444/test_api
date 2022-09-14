@@ -17,7 +17,7 @@ class Portfolio(models.Model):
         unique_together = (('user', 'name',),)
 
 
-class Photos(models.Model):
+class Photo(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="photos")
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
@@ -36,6 +36,6 @@ class Photos(models.Model):
 
 
 class Comments(models.Model):
-    photo = models.ForeignKey(Photos, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name="comments")
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     text = models.TextField()

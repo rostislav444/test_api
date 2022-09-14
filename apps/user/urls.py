@@ -9,7 +9,7 @@ app_name = 'user'
 router = routers.SimpleRouter()
 
 router.register('register', views.RegisterView, basename='register')
-router.register('', views.UserView, basename='user')
+router.register('', views.UserView, basename='profile')
 
 urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='login'),

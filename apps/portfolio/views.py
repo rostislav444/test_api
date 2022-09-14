@@ -1,8 +1,9 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions, mixins, viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from apps.portfolio.models import Portfolio, Photos, Comments
-from apps.portfolio.serializers import PortfolioSerializer, PhotosSerializer, CommentsSerializer
+from apps.portfolio.models import Portfolio, Photo, Comments
+from apps.portfolio.serializers import PortfolioSerializer, PhotoSerializer, CommentsSerializer
 
 
 class PortfolioView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,
@@ -11,6 +12,8 @@ class PortfolioView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Retri
     authentication_classes = [JWTAuthentication]
     model = Portfolio
     serializer_class = PortfolioSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'description']
 
     def get_queryset(self):
         return Portfolio.objects.filter(user=self.request.user)
@@ -19,15 +22,17 @@ class PortfolioView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Retri
         serializer.save(user=self.request.user)
 
 
-class PhotosView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,
+class PhotoView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,
                  mixins.DestroyModelMixin, mixins.UpdateModelMixin, viewsets.ViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = [JWTAuthentication]
-    model = Photos
-    serializer_class = PhotosSerializer
+    model = Photo
+    serializer_class = PhotoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'description', 'portfolio__name']
 
     def get_queryset(self):
-        return Photos.objects.all()
+        return Photo.objects.all()
 
 
 class CommentsView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,

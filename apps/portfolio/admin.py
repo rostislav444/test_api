@@ -1,8 +1,8 @@
 from django.contrib import admin
-from apps.portfolio.models import Photos
+from apps.portfolio.models import Photo
 
 
-@admin.register(Photos)
-class PhotosAdmin(admin.ModelAdmin):
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
     pass
 

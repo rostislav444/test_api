@@ -6,8 +6,8 @@ app_name = 'portfolio'
 
 router = routers.SimpleRouter()
 
-router.register('photos', views.PhotosView, basename='photos')
-router.register('comments', views.CommentsView, basename='comments')
+router.register('photo', views.PhotoView, basename='photo')
+router.register('comment', views.CommentsView, basename='comment')
 router.register('', views.PortfolioView, basename='portfolio')
 
 urlpatterns = [] + router.urls

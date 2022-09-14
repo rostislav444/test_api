@@ -1,11 +1,10 @@
+from django.contrib.auth.models import User
 from rest_framework import generics, status, permissions, mixins, viewsets
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.models import User
-
 
 from apps.user.serializers import UserSerializer, RegisterSerializer
 
